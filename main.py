@@ -1,3 +1,4 @@
+import json
 import os
 import time
 from zipfile import ZipFile
@@ -45,8 +46,12 @@ while True:
         tflite_model = converter.convert()
         with open(tflite_path, 'wb') as file:
             file.write(tflite_model)
+        with open(os.path.join(SERVED_PATH, 'labels.json'), 'w') as file:
+            json.dump(os.listdir(ITEMS_PATH), file)
         # with open(tflite_path, 'w') as file:
         #     file.write('test')
+        # with open(os.path.join(SERVED_PATH, 'labels.json'), 'w') as file:
+        #     json.dump(os.listdir(ITEMS_PATH), file)
 
         print('>> Training complete. Model updated. Waiting for more data...')
     time.sleep(1)
