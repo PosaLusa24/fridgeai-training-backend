@@ -1,8 +1,8 @@
 import os
 import time
 from zipfile import ZipFile
-# from MiniVGG_train import train
-# import tensorflow as tf
+from MiniVGG_train import train
+import tensorflow as tf
 from datetime import datetime
 
 SERVED_PATH = 'served'
@@ -40,13 +40,13 @@ while True:
 
         # Comment these lines and uncomment below code to test with
         # generated dummy model
-        # train(ITEMS_PATH, SERVED_PATH)
-        # converter = tf.lite.TFLiteConverter.from_saved_model(SERVED_PATH)
-        # tflite_model = converter.convert()
-        # with open(tflite_path, 'wb') as file:
-        #     file.write(tflite_model)
-        with open(tflite_path, 'w') as file:
-            file.write('test')
+        train(ITEMS_PATH, SERVED_PATH)
+        converter = tf.lite.TFLiteConverter.from_saved_model(SERVED_PATH)
+        tflite_model = converter.convert()
+        with open(tflite_path, 'wb') as file:
+            file.write(tflite_model)
+        # with open(tflite_path, 'w') as file:
+        #     file.write('test')
 
         print('>> Training complete. Model updated. Waiting for more data...')
     time.sleep(1)
